@@ -15,4 +15,5 @@ struct Article {
     let url: String?
     let imgUrl: String?
     let publishedAt: String?
+    
 }

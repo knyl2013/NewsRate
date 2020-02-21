@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A416119423FF961B00CE9FED /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A416119323FF961B00CE9FED /* icon.png */; };
 		A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */; };
 		A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4523FE907700167D10 /* AppDelegate.swift */; };
 		A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4723FE907700167D10 /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A416119323FF961B00CE9FED /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMemo.swift; sourceTree = "<group>"; };
 		A4CC7A4223FE907700167D10 /* NewsRate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsRate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4CC7A4523FE907700167D10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		A4CC7A4423FE907700167D10 /* NewsRate */ = {
 			isa = PBXGroup;
 			children = (
+				A416119323FF961B00CE9FED /* icon.png */,
 				A4CC7A4523FE907700167D10 /* AppDelegate.swift */,
 				A4CC7A4723FE907700167D10 /* SceneDelegate.swift */,
 				A4CC7A4923FE907700167D10 /* ViewController.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4CC7A5223FE907900167D10 /* LaunchScreen.storyboard in Resources */,
+				A416119423FF961B00CE9FED /* icon.png in Resources */,
 				A4CC7A6623FEB56800167D10 /* TableViewCell.xib in Resources */,
 				A4CC7A4F23FE907900167D10 /* Assets.xcassets in Resources */,
 				A4CC7A4D23FE907700167D10 /* Main.storyboard in Resources */,
