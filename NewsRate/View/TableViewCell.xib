@@ -59,12 +59,26 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【開支嚴冬】消息：恒生基層員工加薪約2% 遜去年但勝「阿媽」 - 香港蘋果日報 - 即時新聞" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtA-O4-ZGS">
-                                <rect key="frame" x="170" y="101" width="650" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VkX-iN-dhx">
+                                <rect key="frame" x="170" y="81" width="650" height="81.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【開支嚴冬】消息：恒生基層員工加薪約2% 遜去年但勝「阿媽」 - 香港蘋果日報 - 即時新聞【開支嚴冬】消息：恒生基層員工加薪約2% 遜去年但勝「阿媽」 - 香港蘋果日報 - 即時新聞" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtA-O4-ZGS">
+                                        <rect key="frame" x="8" y="0.0" width="634" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34 mins ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMH-hf-E9h">
+                                        <rect key="frame" x="0.0" y="61" width="650" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.57648401823150686" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="WMH-hf-E9h" secondAttribute="trailing" id="kQc-rM-mAz"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -82,6 +96,7 @@
                 <outlet property="imageView" destination="TKL-gO-zcb" id="9c4-Wd-51V"/>
                 <outlet property="imgView" destination="TKL-gO-zcb" id="fDF-pB-CmU"/>
                 <outlet property="scoreLbl" destination="dCW-WO-0hl" id="aIC-dX-pk9"/>
+                <outlet property="timeAgoLbl" destination="WMH-hf-E9h" id="kNl-F3-Vny"/>
                 <outlet property="titleLbl" destination="AtA-O4-ZGS" id="GQe-51-ZLQ"/>
                 <outlet property="upBtn" destination="5pS-SP-2Wo" id="Zbg-Rp-k39"/>
             </connections>

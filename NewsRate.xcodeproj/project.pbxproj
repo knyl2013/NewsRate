@@ -75,6 +75,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A416119723FFDFF000CE9FED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC7A6423FEB56800167D10 /* TableViewCell.xib */,
+				A4CC7A4B23FE907700167D10 /* Main.storyboard */,
+				A4CC7A5023FE907900167D10 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A416119823FFDFFF00CE9FED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC7A4923FE907700167D10 /* ViewController.swift */,
+				A4CC7A6323FEB56800167D10 /* TableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A416119923FFE00D00CE9FED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC7A6123FE9C4800167D10 /* Article.swift */,
+				A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A4CC7A3923FE907700167D10 = {
 			isa = PBXGroup;
 			children = (
@@ -99,15 +127,11 @@
 				A416119323FF961B00CE9FED /* icon.png */,
 				A4CC7A4523FE907700167D10 /* AppDelegate.swift */,
 				A4CC7A4723FE907700167D10 /* SceneDelegate.swift */,
-				A4CC7A4923FE907700167D10 /* ViewController.swift */,
-				A4CC7A6323FEB56800167D10 /* TableViewCell.swift */,
-				A4CC7A6423FEB56800167D10 /* TableViewCell.xib */,
-				A4CC7A4B23FE907700167D10 /* Main.storyboard */,
+				A416119923FFE00D00CE9FED /* Model */,
+				A416119723FFDFF000CE9FED /* View */,
+				A416119823FFDFFF00CE9FED /* Controller */,
 				A4CC7A4E23FE907900167D10 /* Assets.xcassets */,
-				A4CC7A5023FE907900167D10 /* LaunchScreen.storyboard */,
 				A4CC7A5323FE907900167D10 /* Info.plist */,
-				A4CC7A6123FE9C4800167D10 /* Article.swift */,
-				A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */,
 				A416119523FFA17D00CE9FED /* GoogleService-Info.plist */,
 			);
 			path = NewsRate;

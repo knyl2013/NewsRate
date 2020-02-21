@@ -19,6 +19,7 @@ class Article {
     let imgUrl: String?
     let publishedAt: String?
     var lastScore: Int = 0
+    var publishedAtDate: Date?
     
     let collectionName = "articleScore"
     
@@ -33,6 +34,15 @@ class Article {
         self.url = url
         self.imgUrl = imgUrl
         self.publishedAt = publishedAt
+        
+        if let p = publishedAt {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            self.publishedAtDate = dateFormatter.date(from:p)!
+        }
+        
+        
     }
     
     func loadScore(tableSource: ViewController) {
@@ -99,6 +109,48 @@ class Article {
         }
     }
     
+    func getTimeAgo() -> String {
+
+        // From Time
+        let fromDate = self.publishedAtDate!
+
+        // To Time
+        let toDate = Date()
+
+        // Estimation
+        // Year
+        if let interval = Calendar.current.dateComponents([.year], from: fromDate, to: toDate).year, interval > 0  {
+
+            return interval == 1 ? "\(interval)" + " " + "year ago" : "\(interval)" + " " + "years ago"
+        }
+
+        // Month
+        if let interval = Calendar.current.dateComponents([.month], from: fromDate, to: toDate).month, interval > 0  {
+
+            return interval == 1 ? "\(interval)" + " " + "month ago" : "\(interval)" + " " + "months ago"
+        }
+
+        // Day
+        if let interval = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day, interval > 0  {
+
+            return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + " " + "days ago"
+        }
+
+        // Hours
+        if let interval = Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour, interval > 0 {
+
+            return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + " " + "hours ago"
+        }
+
+        // Minute
+        if let interval = Calendar.current.dateComponents([.minute], from: fromDate, to: toDate).minute, interval > 0 {
+
+            return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + " " + "minutes ago"
+        }
+
+        return "a moment ago"
+    }
+
     func getTitle() -> String {
         return title ?? "No title"
     }

@@ -55,6 +55,14 @@ class ViewController: UIViewController, UITableViewDataSource {
         newsTable.reloadData()
     }
     
+    @IBAction func sortBtnPressed(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func reloadBtnPressed(_ sender: UIBarButtonItem) {
+        requestInfo()
+    }
+    
     func requestInfo() {
         let parameters : [String:String] = [
             "country" : "hk",

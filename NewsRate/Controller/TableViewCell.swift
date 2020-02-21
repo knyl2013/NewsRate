@@ -23,6 +23,8 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var scoreLbl: UILabel!
     
+    @IBOutlet weak var timeAgoLbl: UILabel!
+    
     let db = Firestore.firestore()
     
     let collectionName = "articleScore"
@@ -66,6 +68,7 @@ class TableViewCell: UITableViewCell {
                 
             }
         }
+        timeAgoLbl.text = article?.getTimeAgo()
         article?.delegate = self
         article?.loadScore()
     }
