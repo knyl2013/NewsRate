@@ -118,7 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func requestInfo() {
         let parameters : [String:String] = [
-            "country" : "hk",
+            "country" : "us",
             "apiKey" : "d807696ae35941f689cb56b0e696e1a5"
         ]
         

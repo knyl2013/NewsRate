@@ -21,11 +21,15 @@ class Article {
     var lastScore: Int = 0
     var publishedAtDate: Date?
     
+    let dictName = "voteHistory"
+    
     let collectionName = "articleScore"
     
     let db = Firestore.firestore()
     
     var delegate: TableViewCell?
+    
+    var history: [String:String] = [:]
     
     init(description: String?, source: String?, title: String?, url: String?, imgUrl: String?, publishedAt: String?) {
         self.description = description
@@ -42,6 +46,12 @@ class Article {
             self.publishedAtDate = dateFormatter.date(from:p)!
         }
         
+        if let h = UserDefaults.standard.dictionary(forKey: dictName) as? [String : String] {
+            history = h
+        }
+        else {
+            UserDefaults.standard.set(history, forKey: dictName)
+        }
         
     }
     
@@ -179,7 +189,13 @@ class Article {
             
             self.delegate?.showScore(score: curScore)
             
+            self.history[self.getTitle()] = "up"
+            
+            UserDefaults.standard.set(self.history, forKey: self.dictName)
+            
             self.lastScore = curScore
+            
+            self.delegate?.updateInfo()
         }
         
     }
@@ -209,7 +225,13 @@ class Article {
             
             self.delegate?.showScore(score: curScore)
             
+            self.history[self.getTitle()] = "down"
+            
+            UserDefaults.standard.set(self.history, forKey: self.dictName)
+            
             self.lastScore = curScore
+            
+            self.delegate?.updateInfo()
         }
     }
 }

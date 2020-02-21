@@ -31,10 +31,16 @@ class TableViewCell: UITableViewCell {
     
     let collectionName = "articleScore"
     
+    let dictName = "voteHistory"
+    
     var delegate: ViewController?
+    
+    var history: [String: String] = [:]
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        reloadVoteHistory()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -49,6 +55,16 @@ class TableViewCell: UITableViewCell {
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         if let a = article {
             delegate?.showDetail(article: a)
+        }
+    }
+    
+    func reloadVoteHistory() {
+        if let h = UserDefaults.standard.dictionary(forKey: dictName) as? [String : String] {
+            history = h
+        }
+        else {
+            UserDefaults.standard.set(history, forKey: dictName)
+            history = [:]
         }
     }
     
@@ -79,10 +95,24 @@ class TableViewCell: UITableViewCell {
                     }
                     
                 }
-                
-                
             }
+            
+            reloadVoteHistory()
+            
+            if history[a.getTitle()] == nil {
+                upBtn.tintColor = .lightGray
+                downBtn.tintColor = .lightGray
+            }
+            else if history[a.getTitle()] == "up" {
+                upBtn.tintColor = .green
+            }
+            else if history[a.getTitle()] == "down" {
+                downBtn.tintColor = .red
+            }
+            
         }
+    
+        
         timeAgoLbl.text = article?.getTimeAgo()
         article?.delegate = self
         article?.loadScore()
@@ -90,16 +120,20 @@ class TableViewCell: UITableViewCell {
     
     
     @IBAction func upBtnPressed(_ sender: UIButton) {
-        upBtn.tintColor = .green
-        
-        article?.upVote()
+        if let ti = article?.getTitle() {
+            if history[ti] == nil {
+                article?.upVote()
+            }
+        }
     }
     
     
     @IBAction func downBtnPressed(_ sender: UIButton) {
-        downBtn.tintColor = .red
-        
-        article?.downVote()
+        if let ti = article?.getTitle() {
+            if history[ti] == nil {
+                article?.downVote()
+            }
+        }
     }
     
 }
