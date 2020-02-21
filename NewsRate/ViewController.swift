@@ -47,6 +47,14 @@ class ViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    func reloadTable() {
+        articles.sort { (a, b) -> Bool in
+            return a.lastScore > b.lastScore
+        }
+        
+        newsTable.reloadData()
+    }
+    
     func requestInfo() {
         let parameters : [String:String] = [
             "country" : "hk",
@@ -74,12 +82,12 @@ class ViewController: UIViewController, UITableViewDataSource {
                                                           imgUrl: json["articles"][i]["urlToImage"].string,
                                                           publishedAt: json["articles"][i]["publishedAt"].string)
                         
+                        newArticle.loadScore(tableSource: self)
+                        
                         self.articles.append(newArticle)
                     }
                     
-                    DispatchQueue.main.async {
-                        self.newsTable.reloadData()
-                    }
+                    self.reloadTable()
                     
                 }
                 catch {
