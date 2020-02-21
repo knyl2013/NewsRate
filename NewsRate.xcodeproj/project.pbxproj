@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A416119423FF961B00CE9FED /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A416119323FF961B00CE9FED /* icon.png */; };
 		A416119623FFA17D00CE9FED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A416119523FFA17D00CE9FED /* GoogleService-Info.plist */; };
+		A416119B23FFF73100CE9FED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416119A23FFF73100CE9FED /* DetailViewController.swift */; };
 		A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */; };
 		A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4523FE907700167D10 /* AppDelegate.swift */; };
 		A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4723FE907700167D10 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		38FCE48A33147552562901F3 /* Pods-NewsRate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsRate.release.xcconfig"; path = "Target Support Files/Pods-NewsRate/Pods-NewsRate.release.xcconfig"; sourceTree = "<group>"; };
 		A416119323FF961B00CE9FED /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A416119523FFA17D00CE9FED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A416119A23FFF73100CE9FED /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMemo.swift; sourceTree = "<group>"; };
 		A4CC7A4223FE907700167D10 /* NewsRate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsRate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4CC7A4523FE907700167D10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			children = (
 				A4CC7A4923FE907700167D10 /* ViewController.swift */,
 				A4CC7A6323FEB56800167D10 /* TableViewCell.swift */,
+				A416119A23FFF73100CE9FED /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */,
 				A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */,
 				A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */,
+				A416119B23FFF73100CE9FED /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

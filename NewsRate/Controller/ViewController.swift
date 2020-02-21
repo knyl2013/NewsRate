@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     let cellName = "TableViewCell"
     
+    var sortBy = "time"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +33,18 @@ class ViewController: UIViewController, UITableViewDataSource {
         newsTable.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         
         requestInfo()
+    }
+    
+    func showDetail(article: Article) {
+        let detailViewController =  self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
+        detailViewController.urlString = article.url
+            
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,19 +58,58 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         cell.updateInfo()
         
+        cell.delegate = self
+        
         return cell
     }
     
     func reloadTable() {
-        articles.sort { (a, b) -> Bool in
-            return a.lastScore > b.lastScore
+        switch sortBy {
+            case "time":
+                articles.sort { (a, b) -> Bool in
+                    return a.publishedAtDate! > b.publishedAtDate!
+                }
+            case "time-rev":
+                articles.sort { (a, b) -> Bool in
+                    return a.publishedAtDate! < b.publishedAtDate!
+                }
+            case "rate":
+                articles.sort { (a, b) -> Bool in
+                    return a.lastScore > b.lastScore
+                }
+            case "rate-rev":
+                articles.sort { (a, b) -> Bool in
+                    return a.lastScore < b.lastScore
+                }
+            default:
+                print("Error: Unknown sorting method - \(sortBy)")
         }
+        
         
         newsTable.reloadData()
     }
     
     @IBAction func sortBtnPressed(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "How to sort", message: "Choose a sorting method", preferredStyle: .alert)
         
+        let sortByTime = UIAlertAction(title: "Latest" + ((sortBy == "time") ? "(Current)" : ""), style: .default) { (action:UIAlertAction!) in
+            self.sortBy = "time"
+            self.reloadTable()
+        }
+        
+        alertController.addAction(sortByTime)
+                
+        let sortByRate = UIAlertAction(title: "Hottest" + ((sortBy == "rate") ? "(Current)" : ""), style: .default) { (action:UIAlertAction!) in
+            self.sortBy = "rate"
+            self.reloadTable()
+        }
+        
+        alertController.addAction(sortByRate)
+    
+        
+        self.present(alertController, animated: true) {
+            self.reloadTable()
+        }
     }
     
     @IBAction func reloadBtnPressed(_ sender: UIBarButtonItem) {

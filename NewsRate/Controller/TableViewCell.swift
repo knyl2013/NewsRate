@@ -25,10 +25,14 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeAgoLbl: UILabel!
     
+    @IBOutlet weak var ctView: UIView!
+    
     let db = Firestore.firestore()
     
     let collectionName = "articleScore"
-
+    
+    var delegate: ViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -37,7 +41,18 @@ class TableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        titleLbl.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapFunction))
+        titleLbl.addGestureRecognizer(tap)
     }
+    
+    @objc func tapFunction(sender:UITapGestureRecognizer) {
+        if let a = article {
+            delegate?.showDetail(article: a)
+        }
+    }
+    
+    
     
     func showScore(score: Int) {
         if score > 99 {
