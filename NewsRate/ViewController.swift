@@ -63,8 +63,6 @@ class ViewController: UIViewController, UITableViewDataSource {
                     
                     let json = try JSON(data: response.data!)
                     
-                    print(json)
-                    
                     let len: Int = json["articles"].count
                 
                     
@@ -77,13 +75,11 @@ class ViewController: UIViewController, UITableViewDataSource {
                                                           publishedAt: json["articles"][i]["publishedAt"].string)
                         
                         self.articles.append(newArticle)
-                        
-                        DispatchQueue.main.async {
-                            self.newsTable.reloadData()
-                        }
                     }
                     
-                    
+                    DispatchQueue.main.async {
+                        self.newsTable.reloadData()
+                    }
                     
                 }
                 catch {

@@ -19,23 +19,28 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="flv-1H-pvN">
                         <rect key="frame" x="10" y="10" width="820" height="243"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TKL-gO-zcb">
-                                <rect key="frame" x="0.0" y="56.5" width="130" height="130"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slowmo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TKL-gO-zcb">
+                                <rect key="frame" x="0.0" y="56" width="130" height="131"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="ER9-sS-oRz"/>
                                     <constraint firstAttribute="width" constant="130" id="PZj-kY-3Sj"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zcN-nH-GF7">
-                                <rect key="frame" x="130" y="89.5" width="40" height="64.5"/>
+                                <rect key="frame" x="130" y="51.5" width="40" height="140.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-SP-2Wo">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="22"/>
-                                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="arrow.up.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="upBtnPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TlC-Qq-VfV"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCW-WO-0hl">
-                                        <rect key="frame" x="0.0" y="22" width="40" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCW-WO-0hl">
+                                        <rect key="frame" x="0.0" y="60" width="40" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="vfb-dY-Rcp"/>
                                         </constraints>
@@ -44,9 +49,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdu-zk-aN5">
-                                        <rect key="frame" x="0.0" y="42.5" width="40" height="22"/>
-                                        <color key="tintColor" red="0.90588235289999997" green="0.29803921570000003" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="80.5" width="40" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="arrow.down.circle.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="downBtnPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="047-gy-kIr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -69,9 +78,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="downBtn" destination="Qdu-zk-aN5" id="U3h-Al-XTC"/>
                 <outlet property="imageView" destination="TKL-gO-zcb" id="9c4-Wd-51V"/>
                 <outlet property="imgView" destination="TKL-gO-zcb" id="fDF-pB-CmU"/>
+                <outlet property="scoreLbl" destination="dCW-WO-0hl" id="aIC-dX-pk9"/>
                 <outlet property="titleLbl" destination="AtA-O4-ZGS" id="GQe-51-ZLQ"/>
+                <outlet property="upBtn" destination="5pS-SP-2Wo" id="Zbg-Rp-k39"/>
             </connections>
             <point key="canvasLocation" x="530.43478260869574" y="255.46875"/>
         </tableViewCell>
@@ -79,5 +91,6 @@
     <resources>
         <image name="arrow.down.circle.fill" catalog="system" width="64" height="60"/>
         <image name="arrow.up.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="slowmo" catalog="system" width="64" height="60"/>
     </resources>
 </document>

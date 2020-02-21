@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TableViewCell: UITableViewCell {
     
@@ -16,15 +17,33 @@ class TableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
     
+    @IBOutlet weak var upBtn: UIButton!
+    
+    @IBOutlet weak var downBtn: UIButton!
+    
+    @IBOutlet weak var scoreLbl: UILabel!
+    
+    let db = Firestore.firestore()
+    
+    let collectionName = "articleScore"
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func showScore(score: Int) {
+        if score > 99 {
+            scoreLbl.text = "99+"
+        }
+        else {
+            scoreLbl.text = "\(score)"
+        }
     }
     
     func updateInfo() {
@@ -47,6 +66,22 @@ class TableViewCell: UITableViewCell {
                 
             }
         }
+        article?.delegate = self
+        article?.loadScore()
+    }
+    
+    
+    @IBAction func upBtnPressed(_ sender: UIButton) {
+        upBtn.tintColor = .green
+        
+        article?.upVote()
+    }
+    
+    
+    @IBAction func downBtnPressed(_ sender: UIButton) {
+        downBtn.tintColor = .red
+        
+        article?.downVote()
     }
     
 }
