@@ -45,6 +45,10 @@ class Article {
     
     var lastCommentCount: Int = 0
     
+    var hash: String?
+    
+
+    
     init(description: String?, source: String?, title: String?, url: String?, imgUrl: String?, publishedAt: String?) {
         self.description = description
         self.source = source
@@ -69,11 +73,21 @@ class Article {
         
     }
     
+    func getTitleHash() -> String {
+        if let safeHash = hash {
+            return safeHash
+        }
+        else {
+            hash = API.hash(string: getTitle())
+            return hash!
+        }
+    }
+    
    
     func addComment(caller: CommentTableViewController, msg: String) {
         var res: [Comment] = []
         
-        let doc = db.collection(commentCollectionName).document(getTitle())
+        let doc = db.collection(commentCollectionName).document(getTitleHash())
         
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -81,11 +95,11 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String : [[String:String]]] {
-                    if data[self.getTitle()] == nil {
-                        doc.setData([self.getTitle() : [[String:String]]()])
+                    if data[self.getTitleHash()] == nil {
+                        doc.setData([self.getTitleHash() : [[String:String]]()])
                     }
                     else {
-                        if var safeCommentArr = data[self.getTitle()] {
+                        if var safeCommentArr = data[self.getTitleHash()] {
                             safeCommentArr.append([ self.senderField: API.randEmoji(),
                                                     self.messageField: msg,
                                                     self.sentDateField: API.fromDateToString(date: Date())])
@@ -94,19 +108,19 @@ class Article {
                                 res.append(Comment(sender: comment[self.senderField]!, message: comment[self.messageField]!, sentDate: comment[self.sentDateField]!))
                             }
                             
-                            doc.setData([self.getTitle() : safeCommentArr])
+                            doc.setData([self.getTitleHash() : safeCommentArr])
                             
                             self.lastCommentCount = safeCommentArr.count
                             
                             caller.didAddComment(comments: res)
                         }
                         else {
-                            doc.setData([self.getTitle() : [[String:String]]()])
+                            doc.setData([self.getTitleHash() : [[String:String]]()])
                         }
                     }
                 }
                 else {
-                    doc.setData([self.getTitle() : [[String:String]]()])
+                    doc.setData([self.getTitleHash() : [[String:String]]()])
                 }
             }
         }
@@ -115,7 +129,7 @@ class Article {
     func loadComments(caller: LoadCommentsCaller) {
         var res: [Comment] = []
         
-        let doc = db.collection(commentCollectionName).document(getTitle())
+        let doc = db.collection(commentCollectionName).document(getTitleHash())
         
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -123,11 +137,11 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String : [[String:String]]] {
-                    if data[self.getTitle()] == nil {
-                        doc.setData([self.getTitle() : [[String:String]]()])
+                    if data[self.getTitleHash()] == nil {
+                        doc.setData([self.getTitleHash() : [[String:String]]()])
                     }
                     else {
-                        if let safeCommentArr = data[self.getTitle()] {
+                        if let safeCommentArr = data[self.getTitleHash()] {
                             for comment in safeCommentArr {
                                 res.append(Comment(sender: comment[self.senderField]!, message: comment[self.messageField]!, sentDate: comment[self.sentDateField]!))
                             }
@@ -137,12 +151,12 @@ class Article {
                             caller.didLoadComments(comments: res)
                         }
                         else {
-                            doc.setData([self.getTitle() : [[String:String]]()])
+                            doc.setData([self.getTitleHash() : [[String:String]]()])
                         }
                     }
                 }
                 else {
-                    doc.setData([self.getTitle() : [[String:String]]()])
+                    doc.setData([self.getTitleHash() : [[String:String]]()])
                 }
             }
         }
@@ -153,7 +167,7 @@ class Article {
     func loadScore(tableSource: ViewController) {
         var curScore: Int = 0
         
-        let doc = db.collection(collectionName).document(getTitle())
+        let doc = db.collection(collectionName).document(getTitleHash())
                 
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -161,19 +175,19 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String: Int] {
-                    if data[self.getTitle()] == nil {
-                        doc.setData([self.getTitle() : 0])
+                    if data[self.getTitleHash()] == nil {
+                        doc.setData([self.getTitleHash() : 0])
                     }
                     else {
-                        curScore = data[self.getTitle()]!
+                        curScore = data[self.getTitleHash()]!
                     }
                 }
                 else {
-                    doc.setData([self.getTitle() : 0])
+                    doc.setData([self.getTitleHash() : 0])
                 }
             }
             
-            doc.setData([self.getTitle() : curScore])
+            doc.setData([self.getTitleHash() : curScore])
             
             self.delegate?.showScore(score: curScore)
             
@@ -186,7 +200,7 @@ class Article {
     func loadScore() {
         var curScore: Int = 0
         
-        let doc = db.collection(collectionName).document(getTitle())
+        let doc = db.collection(collectionName).document(getTitleHash())
                 
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -194,19 +208,19 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String: Int] {
-                    if data[self.getTitle()] == nil {
-                        doc.setData([self.getTitle() : 0])
+                    if data[self.getTitleHash()] == nil {
+                        doc.setData([self.getTitleHash() : 0])
                     }
                     else {
-                        curScore = data[self.getTitle()]!
+                        curScore = data[self.getTitleHash()]!
                     }
                 }
                 else {
-                    doc.setData([self.getTitle() : 0])
+                    doc.setData([self.getTitleHash() : 0])
                 }
             }
             
-            doc.setData([self.getTitle() : curScore])
+            doc.setData([self.getTitleHash() : curScore])
             
             self.delegate?.showScore(score: curScore)
             
@@ -263,7 +277,7 @@ class Article {
     func upVote() {
         var curScore: Int = 0
         
-        let doc = db.collection(collectionName).document(getTitle())
+        let doc = db.collection(collectionName).document(getTitleHash())
                 
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -271,20 +285,20 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String: Int] {
-                    curScore = data[self.getTitle()]!
+                    curScore = data[self.getTitleHash()]!
                 }
                 else {
-                    doc.setData([self.getTitle() : 0])
+                    doc.setData([self.getTitleHash() : 0])
                 }
             }
             
             curScore += 1
             
-            doc.setData([self.getTitle() : curScore])
+            doc.setData([self.getTitleHash() : curScore])
             
             self.delegate?.showScore(score: curScore)
             
-            self.history[self.getTitle()] = "up"
+            self.history[self.getTitleHash()] = "up"
             
             UserDefaults.standard.set(self.history, forKey: self.dictName)
             
@@ -299,7 +313,7 @@ class Article {
     func downVote() {
         var curScore: Int = 0
         
-        let doc = db.collection(collectionName).document(getTitle())
+        let doc = db.collection(collectionName).document(getTitleHash())
                 
         doc.getDocument { (querySnapshot, error) in
             if let e = error {
@@ -307,20 +321,20 @@ class Article {
             }
             else {
                 if let data = querySnapshot?.data() as? [String: Int] {
-                    curScore = data[self.getTitle()]!
+                    curScore = data[self.getTitleHash()]!
                 }
                 else {
-                    doc.setData([self.getTitle() : 0])
+                    doc.setData([self.getTitleHash() : 0])
                 }
             }
             
             curScore -= 1
             
-            doc.setData([self.getTitle() : curScore])
+            doc.setData([self.getTitleHash() : curScore])
             
             self.delegate?.showScore(score: curScore)
             
-            self.history[self.getTitle()] = "down"
+            self.history[self.getTitleHash()] = "down"
             
             UserDefaults.standard.set(self.history, forKey: self.dictName)
             

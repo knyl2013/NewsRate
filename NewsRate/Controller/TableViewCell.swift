@@ -112,15 +112,15 @@ class TableViewCell: UITableViewCell, LoadCommentsCaller {
             
             reloadVoteHistory()
             
-            if history[a.getTitle()] == nil {
+            if history[a.getTitleHash()] == nil {
                 upBtn.tintColor = .lightGray
                 downBtn.tintColor = .lightGray
             }
-            else if history[a.getTitle()] == "up" {
+            else if history[a.getTitleHash()] == "up" {
                 upBtn.tintColor = .green
                 downBtn.tintColor = .lightGray
             }
-            else if history[a.getTitle()] == "down" {
+            else if history[a.getTitleHash()] == "down" {
                 upBtn.tintColor = .lightGray
                 downBtn.tintColor = .red
             }
@@ -136,7 +136,7 @@ class TableViewCell: UITableViewCell, LoadCommentsCaller {
     
     
     @IBAction func upBtnPressed(_ sender: UIButton) {
-        if let ti = article?.getTitle() {
+        if let ti = article?.getTitleHash() {
             if history[ti] == nil {
                 article?.upVote()
             }
@@ -145,7 +145,7 @@ class TableViewCell: UITableViewCell, LoadCommentsCaller {
     
     
     @IBAction func downBtnPressed(_ sender: UIButton) {
-        if let ti = article?.getTitle() {
+        if let ti = article?.getTitleHash() {
             if history[ti] == nil {
                 article?.downVote()
             }
