@@ -25,6 +25,11 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     var sortBy = "time"
     
+    var country: String = "hk"
+    
+    @IBOutlet weak var countryBtn: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,20 +38,26 @@ class ViewController: UIViewController, UITableViewDataSource {
         newsTable.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         
         requestInfo()
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     func showDetail(article: Article) {
         let detailViewController =  self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         
-        detailViewController.urlString = article.url
+        detailViewController.article = article
             
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
-    }
     
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
@@ -116,9 +127,34 @@ class ViewController: UIViewController, UITableViewDataSource {
         requestInfo()
     }
     
+    func addCountryBtn(title: String, label: String, alertController: UIAlertController) {
+        alertController.addAction(UIAlertAction(title: title, style: .default) {
+            (action:UIAlertAction!) in
+                self.countryBtn.title = title
+                self.country = label
+                self.requestInfo()
+        })
+    }
+    
+    @IBAction func countryBtnPressed(_ sender: UIBarButtonItem) {
+            let alertController = UIAlertController(title: "What news to show", message: "Choose a country", preferredStyle: .alert)
+            
+            addCountryBtn(title: "🇭🇰 Hong Kong", label: "hk", alertController: alertController)
+        
+            addCountryBtn(title: "🇺🇸 United States", label: "us", alertController: alertController)
+        
+            addCountryBtn(title: "🇯🇵 Japan", label: "jp", alertController: alertController)
+            
+            addCountryBtn(title: "🇦🇺 Australia", label: "au", alertController: alertController)
+            
+            self.present(alertController, animated: true) {
+                self.reloadTable()
+            }
+    }
+    
     func requestInfo() {
         let parameters : [String:String] = [
-            "country" : "us",
+            "country" : country,
             "apiKey" : "d807696ae35941f689cb56b0e696e1a5"
         ]
         
@@ -129,6 +165,8 @@ class ViewController: UIViewController, UITableViewDataSource {
             case .success(let _):
                 do {
                     self.articles = []
+                    
+                    self.newsTable.reloadData()
                     
                     let json = try JSON(data: response.data!)
                     

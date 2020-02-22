@@ -9,6 +9,10 @@
 import Foundation
 import Firebase
 
+protocol LoadCommentsCaller {
+    func didLoadComments(comments: [Comment])
+}
+
 class Article {
     
     
@@ -24,6 +28,14 @@ class Article {
     let dictName = "voteHistory"
     
     let collectionName = "articleScore"
+    
+    let commentCollectionName = "articleComments"
+    
+    let senderField = "sender"
+    
+    let messageField = "message"
+    
+    let sentDateField = "sentDate"
     
     let db = Firestore.firestore()
     
@@ -52,6 +64,82 @@ class Article {
         else {
             UserDefaults.standard.set(history, forKey: dictName)
         }
+        
+    }
+    
+   
+    func addComment(caller: CommentTableViewController, msg: String) {
+        var res: [Comment] = []
+        
+        let doc = db.collection(commentCollectionName).document(getTitle())
+        
+        doc.getDocument { (querySnapshot, error) in
+            if let e = error {
+                print(e)
+            }
+            else {
+                if let data = querySnapshot?.data() as? [String : [[String:String]]] {
+                    if data[self.getTitle()] == nil {
+                        doc.setData([self.getTitle() : [[String:String]]()])
+                    }
+                    else {
+                        if var safeCommentArr = data[self.getTitle()] {
+                            safeCommentArr.append([ self.senderField: API.randEmoji(),
+                                                    self.messageField: msg,
+                                                    self.sentDateField: API.fromDateToString(date: Date())])
+                            
+                            for comment in safeCommentArr {
+                                res.append(Comment(sender: comment[self.senderField]!, message: comment[self.messageField]!, sentDate: comment[self.sentDateField]!))
+                            }
+                            
+                            doc.setData([self.getTitle() : safeCommentArr])
+                            
+                            caller.didAddComment(comments: res)
+                        }
+                        else {
+                            doc.setData([self.getTitle() : [[String:String]]()])
+                        }
+                    }
+                }
+                else {
+                    doc.setData([self.getTitle() : [[String:String]]()])
+                }
+            }
+        }
+    }
+    
+    func loadComments(caller: LoadCommentsCaller) {
+        var res: [Comment] = []
+        
+        let doc = db.collection(commentCollectionName).document(getTitle())
+        
+        doc.getDocument { (querySnapshot, error) in
+            if let e = error {
+                print(e)
+            }
+            else {
+                if let data = querySnapshot?.data() as? [String : [[String:String]]] {
+                    if data[self.getTitle()] == nil {
+                        doc.setData([self.getTitle() : [[String:String]]()])
+                    }
+                    else {
+                        if let safeCommentArr = data[self.getTitle()] {
+                            for comment in safeCommentArr {
+                                res.append(Comment(sender: comment[self.senderField]!, message: comment[self.messageField]!, sentDate: comment[self.sentDateField]!))
+                            }
+                            caller.didLoadComments(comments: res)
+                        }
+                        else {
+                            doc.setData([self.getTitle() : [[String:String]]()])
+                        }
+                    }
+                }
+                else {
+                    doc.setData([self.getTitle() : [[String:String]]()])
+                }
+            }
+        }
+        
         
     }
     

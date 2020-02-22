@@ -10,6 +10,11 @@
 		A416119423FF961B00CE9FED /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A416119323FF961B00CE9FED /* icon.png */; };
 		A416119623FFA17D00CE9FED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A416119523FFA17D00CE9FED /* GoogleService-Info.plist */; };
 		A416119B23FFF73100CE9FED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A416119A23FFF73100CE9FED /* DetailViewController.swift */; };
+		A42391252400F5C300CC282C /* CommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42391242400F5C300CC282C /* CommentTableViewController.swift */; };
+		A42391282400FE2100CC282C /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42391262400FE2100CC282C /* CommentTableViewCell.swift */; };
+		A42391292400FE2100CC282C /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42391272400FE2100CC282C /* CommentTableViewCell.xib */; };
+		A423912B240107A300CC282C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423912A240107A300CC282C /* Comment.swift */; };
+		A423912D240121FB00CC282C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423912C240121FA00CC282C /* API.swift */; };
 		A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */; };
 		A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4523FE907700167D10 /* AppDelegate.swift */; };
 		A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4723FE907700167D10 /* SceneDelegate.swift */; };
@@ -31,6 +36,11 @@
 		A416119323FF961B00CE9FED /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A416119523FFA17D00CE9FED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A416119A23FFF73100CE9FED /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A42391242400F5C300CC282C /* CommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewController.swift; sourceTree = "<group>"; };
+		A42391262400FE2100CC282C /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		A42391272400FE2100CC282C /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		A423912A240107A300CC282C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		A423912C240121FA00CC282C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMemo.swift; sourceTree = "<group>"; };
 		A4CC7A4223FE907700167D10 /* NewsRate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsRate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4CC7A4523FE907700167D10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +93,7 @@
 				A4CC7A6423FEB56800167D10 /* TableViewCell.xib */,
 				A4CC7A4B23FE907700167D10 /* Main.storyboard */,
 				A4CC7A5023FE907900167D10 /* LaunchScreen.storyboard */,
+				A42391272400FE2100CC282C /* CommentTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -93,6 +104,8 @@
 				A4CC7A4923FE907700167D10 /* ViewController.swift */,
 				A4CC7A6323FEB56800167D10 /* TableViewCell.swift */,
 				A416119A23FFF73100CE9FED /* DetailViewController.swift */,
+				A42391242400F5C300CC282C /* CommentTableViewController.swift */,
+				A42391262400FE2100CC282C /* CommentTableViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -102,6 +115,8 @@
 			children = (
 				A4CC7A6123FE9C4800167D10 /* Article.swift */,
 				A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */,
+				A423912A240107A300CC282C /* Comment.swift */,
+				A423912C240121FA00CC282C /* API.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +227,7 @@
 				A416119423FF961B00CE9FED /* icon.png in Resources */,
 				A4CC7A6623FEB56800167D10 /* TableViewCell.xib in Resources */,
 				A4CC7A4F23FE907900167D10 /* Assets.xcassets in Resources */,
+				A42391292400FE2100CC282C /* CommentTableViewCell.xib in Resources */,
 				A4CC7A4D23FE907700167D10 /* Main.storyboard in Resources */,
 				A416119623FFA17D00CE9FED /* GoogleService-Info.plist in Resources */,
 			);
@@ -266,9 +282,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A423912D240121FB00CC282C /* API.swift in Sources */,
 				A4CC7A6523FEB56800167D10 /* TableViewCell.swift in Sources */,
 				A4CC7A6223FE9C4800167D10 /* Article.swift in Sources */,
+				A42391252400F5C300CC282C /* CommentTableViewController.swift in Sources */,
 				A4CC7A4A23FE907700167D10 /* ViewController.swift in Sources */,
+				A42391282400FE2100CC282C /* CommentTableViewCell.swift in Sources */,
+				A423912B240107A300CC282C /* Comment.swift in Sources */,
 				A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */,
 				A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */,
 				A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */,

@@ -9,18 +9,39 @@
 import UIKit
 import WebKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, LoadCommentsCaller {
     
     @IBOutlet weak var webView: WKWebView!
     
-    var urlString: String?
+    @IBOutlet weak var commentBtn: UIBarButtonItem!
+    
+    var article: Article?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let safeUrl = urlString {
+        if let safeUrl = article?.url {
             loadPage(urlString: safeUrl)
         }
+        
+        self.title = article?.title
+        
+        article?.loadComments(caller: self)
+    }
+    
+    func didLoadComments(comments: [Comment]) {
+        if comments.count > 99 {
+            commentBtn.title = "Comments (99+)"
+        }
+        else {
+            commentBtn.title = "Comments (\(comments.count))"
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.setToolbarHidden(false, animated: false)
     }
     
     func loadPage(urlString: String) {
@@ -33,6 +54,18 @@ class DetailViewController: UIViewController {
         
         webView?.load(request)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      
+        if segue.identifier == "goToComment" {
+            let commentView = segue.destination as! CommentTableViewController
+            
+            commentView.article = article
+        }
+        
+    }
+    
+    
     
     
 }

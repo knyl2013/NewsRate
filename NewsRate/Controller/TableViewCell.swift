@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class TableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell, LoadCommentsCaller {
     
     var article: Article?
     
@@ -26,6 +26,10 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var timeAgoLbl: UILabel!
     
     @IBOutlet weak var ctView: UIView!
+    
+    @IBOutlet weak var commentCountLbl: UILabel!
+    
+    @IBOutlet weak var commentStackView: UIStackView!
     
     let db = Firestore.firestore()
     
@@ -55,6 +59,15 @@ class TableViewCell: UITableViewCell {
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         if let a = article {
             delegate?.showDetail(article: a)
+        }
+    }
+    
+    func didLoadComments(comments: [Comment]) {
+        if comments.count > 99 {
+            commentCountLbl.text = "99+"
+        }
+        else {
+            commentCountLbl.text = "\(comments.count)"
         }
     }
     
@@ -105,8 +118,10 @@ class TableViewCell: UITableViewCell {
             }
             else if history[a.getTitle()] == "up" {
                 upBtn.tintColor = .green
+                downBtn.tintColor = .lightGray
             }
             else if history[a.getTitle()] == "down" {
+                upBtn.tintColor = .lightGray
                 downBtn.tintColor = .red
             }
             
@@ -116,6 +131,7 @@ class TableViewCell: UITableViewCell {
         timeAgoLbl.text = article?.getTimeAgo()
         article?.delegate = self
         article?.loadScore()
+        article?.loadComments(caller: self)
     }
     
     
