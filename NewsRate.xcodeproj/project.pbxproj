@@ -15,6 +15,7 @@
 		A42391292400FE2100CC282C /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42391272400FE2100CC282C /* CommentTableViewCell.xib */; };
 		A423912B240107A300CC282C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423912A240107A300CC282C /* Comment.swift */; };
 		A423912D240121FB00CC282C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423912C240121FA00CC282C /* API.swift */; };
+		A423913024014BB700CC282C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A423912F24014BB700CC282C /* IQKeyboardManagerSwift */; };
 		A4A20E5B23FEC3CA007C76D4 /* ImageMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A20E5A23FEC3CA007C76D4 /* ImageMemo.swift */; };
 		A4CC7A4623FE907700167D10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4523FE907700167D10 /* AppDelegate.swift */; };
 		A4CC7A4823FE907700167D10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC7A4723FE907700167D10 /* SceneDelegate.swift */; };
@@ -62,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4CC7A5B23FE90C700167D10 /* SwiftyJSON in Frameworks */,
+				A423913024014BB700CC282C /* IQKeyboardManagerSwift in Frameworks */,
 				A4CC7A5E23FE917100167D10 /* Alamofire in Frameworks */,
 				E64E8217A5373820FC60F15B /* libPods-NewsRate.a in Frameworks */,
 			);
@@ -176,6 +178,7 @@
 			packageProductDependencies = (
 				A4CC7A5A23FE90C700167D10 /* SwiftyJSON */,
 				A4CC7A5D23FE917100167D10 /* Alamofire */,
+				A423912F24014BB700CC282C /* IQKeyboardManagerSwift */,
 			);
 			productName = NewsRate;
 			productReference = A4CC7A4223FE907700167D10 /* NewsRate.app */;
@@ -208,6 +211,7 @@
 			packageReferences = (
 				A4CC7A5923FE90C700167D10 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				A4CC7A5C23FE917100167D10 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A423912E24014BB700CC282C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = A4CC7A4323FE907700167D10 /* Products */;
 			projectDirPath = "";
@@ -494,6 +498,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A423912E24014BB700CC282C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.5;
+			};
+		};
 		A4CC7A5923FE90C700167D10 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -513,6 +525,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A423912F24014BB700CC282C /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A423912E24014BB700CC282C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		A4CC7A5A23FE90C700167D10 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A4CC7A5923FE90C700167D10 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

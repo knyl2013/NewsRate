@@ -43,6 +43,8 @@ class Article {
     
     var history: [String:String] = [:]
     
+    var lastCommentCount: Int = 0
+    
     init(description: String?, source: String?, title: String?, url: String?, imgUrl: String?, publishedAt: String?) {
         self.description = description
         self.source = source
@@ -94,6 +96,8 @@ class Article {
                             
                             doc.setData([self.getTitle() : safeCommentArr])
                             
+                            self.lastCommentCount = safeCommentArr.count
+                            
                             caller.didAddComment(comments: res)
                         }
                         else {
@@ -127,6 +131,9 @@ class Article {
                             for comment in safeCommentArr {
                                 res.append(Comment(sender: comment[self.senderField]!, message: comment[self.messageField]!, sentDate: comment[self.sentDateField]!))
                             }
+                            
+                            self.lastCommentCount = safeCommentArr.count
+                            
                             caller.didLoadComments(comments: res)
                         }
                         else {

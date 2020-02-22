@@ -79,19 +79,15 @@ class ViewController: UIViewController, UITableViewDataSource {
             case "time":
                 articles.sort { (a, b) -> Bool in
                     return a.publishedAtDate! > b.publishedAtDate!
-                }
-            case "time-rev":
-                articles.sort { (a, b) -> Bool in
-                    return a.publishedAtDate! < b.publishedAtDate!
-                }
+            }
             case "rate":
                 articles.sort { (a, b) -> Bool in
                     return a.lastScore > b.lastScore
-                }
-            case "rate-rev":
+            }
+            case "comment":
                 articles.sort { (a, b) -> Bool in
-                    return a.lastScore < b.lastScore
-                }
+                    return a.lastCommentCount > b.lastCommentCount
+            }
             default:
                 print("Error: Unknown sorting method - \(sortBy)")
         }
@@ -110,12 +106,19 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         alertController.addAction(sortByTime)
                 
-        let sortByRate = UIAlertAction(title: "Hottest" + ((sortBy == "rate") ? "(Current)" : ""), style: .default) { (action:UIAlertAction!) in
+        let sortByRate = UIAlertAction(title: "Upvote" + ((sortBy == "rate") ? "(Current)" : ""), style: .default) { (action:UIAlertAction!) in
             self.sortBy = "rate"
             self.reloadTable()
         }
         
         alertController.addAction(sortByRate)
+        
+        let sortByComment = UIAlertAction(title: "Comments" + ((sortBy == "comment") ? "(Current)" : ""), style: .default) { (action:UIAlertAction!) in
+            self.sortBy = "comment"
+            self.reloadTable()
+        }
+        
+        alertController.addAction(sortByComment)
     
         
         self.present(alertController, animated: true) {

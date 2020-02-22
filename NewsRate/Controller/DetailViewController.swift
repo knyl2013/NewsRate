@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class DetailViewController: UIViewController, LoadCommentsCaller {
+class DetailViewController: UIViewController, LoadCommentsCaller, WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     
@@ -26,7 +26,13 @@ class DetailViewController: UIViewController, LoadCommentsCaller {
         
         self.title = article?.title
         
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.yellow]
+        
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         article?.loadComments(caller: self)
+                
+        webView.navigationDelegate = self
     }
     
     func didLoadComments(comments: [Comment]) {
@@ -38,6 +44,10 @@ class DetailViewController: UIViewController, LoadCommentsCaller {
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -45,7 +55,9 @@ class DetailViewController: UIViewController, LoadCommentsCaller {
     }
     
     func loadPage(urlString: String) {
-        guard let url = URL(string: urlString) else {
+        let newUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url = URL(string: newUrl) else {
             print("error in opening url")
             return
         }

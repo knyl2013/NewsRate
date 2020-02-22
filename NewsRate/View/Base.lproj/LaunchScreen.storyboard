@@ -28,13 +28,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NewsRate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8k-t1-SOZ">
                                         <rect key="frame" x="207" y="65.5" width="145" height="39.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.019607843137254902" green="0.10588235294117647" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="sFh-Jp-tb2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GkH-AT-6Z7"/>
                             <constraint firstItem="sFh-Jp-tb2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Oog-g7-xsx"/>

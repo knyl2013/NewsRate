@@ -29,6 +29,12 @@ class CommentTableViewController: UIViewController, UITableViewDataSource, LoadC
         tableView.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: identifier)
         
         article?.loadComments(caller: self)
+        
+        self.title = article?.title
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.yellow]
+        
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +53,12 @@ class CommentTableViewController: UIViewController, UITableViewDataSource, LoadC
         self.comments = comments
         
         self.tableView.reloadData()
+        
+        if comments.count > 0 {
+            let indexPath = IndexPath(row: comments.count - 1, section: 0)
+            
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     func didAddComment(comments: [Comment]) {
@@ -63,6 +75,10 @@ class CommentTableViewController: UIViewController, UITableViewDataSource, LoadC
         if let msg = messageTextField.text {
             if msg != "" {
                 article?.addComment(caller: self, msg: msg)
+                messageTextField.text = ""
+                messageTextField.endEditing(true)
+                let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height + 100)
+                self.tableView.setContentOffset(scrollPoint, animated: true)
             }
         }
     }
